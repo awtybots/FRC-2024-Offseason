@@ -53,7 +53,7 @@ public class IntakeIOSim implements IntakeIO {
   public void setPercentSpeed(double velocityRadPerSec) {
     closedLoop = true;
     pid.setSetpoint(velocityRadPerSec);
-    this.ffVolts = ffVolts;
+    // this.ffVolts = ffVolts;
   }
 
   @Override

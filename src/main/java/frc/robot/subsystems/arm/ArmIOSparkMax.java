@@ -132,7 +132,7 @@ public class ArmIOSparkMax implements ArmIO {
   public void setVelocity(double velocityRPM) {
     setTargetAngle(
         targetAngle
-            + 0.02 // TODO correct cycle time here needed
+            + 0.02
                 // * ArmConstants.armConversion
                 * Units.rotationsToRadians(velocityRPM));
   }

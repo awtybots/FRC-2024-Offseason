@@ -30,7 +30,3 @@ public class StowPosition {
   }
 }
 
-//  TODO check to add the `.until(
-//             () -> {
-//               return arm.getIsFinished();
-//             });`

@@ -24,7 +24,7 @@ import org.littletonrobotics.junction.AutoLogOutput;
 
 /** This implementation of FlywheelIO is real and uses two Neo SparkMax motors. */
 public class FlywheelIOSparkMax implements FlywheelIO {
-  private static final double GEAR_RATIO = 2;
+  // private static final double GEAR_RATIO = 2;
 
   /*
    Note: I do not believe there will be any situation where the top motor and the bottom motor

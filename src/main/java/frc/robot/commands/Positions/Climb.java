@@ -29,7 +29,3 @@ public class Climb {
         arm);
   }
 }
-//  TODO check to add the `.until(
-//             () -> {
-//               return arm.getIsFinished();
-//             });`
