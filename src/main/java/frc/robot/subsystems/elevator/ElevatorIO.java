@@ -10,30 +10,31 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 
-package frc.robot.subsystems.climber;
+package frc.robot.subsystems.elevator;
 
-import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.ElevatorConstants;
 import org.littletonrobotics.junction.AutoLog;
 
-/** Interface for operative components of (chain) Climber subsystem. */
-public interface ClimberIO {
+/** Interface for operative components of (chain) Elevator subsystem. */
+public interface ElevatorIO {
+
   @AutoLog
-  public static class ClimberIOInputs {
-    public double leftPosition = ClimberConstants.initialPosition;
+  public static class ElevatorIOInputs {
+    public double leftPosition = ElevatorConstants.initialPosition;
     public double leftVelocity = 0.0;
     public double leftAppliedVolts = 0.0;
     public double[] leftCurrentAmps = new double[] {};
 
-    public double rightPosition = ClimberConstants.initialPosition;
+    public double rightPosition = ElevatorConstants.initialPosition;
     public double rightVelocity = 0.0;
     public double rightAppliedVolts = 0.0;
     public double[] rightCurrentAmps = new double[] {};
 
-    public double targetPosition = ClimberConstants.initialPosition;
+    public double targetPosition = ElevatorConstants.initialPosition;
   }
 
   /** Updates the set of loggable inputs. */
-  public default void updateInputs(ClimberIOInputs inputs) {}
+  public default void updateInputs(ElevatorIOInputs inputs) {}
 
   /** Run open loop at the specified voltage. */
   public default void setVoltage(double volts) {}

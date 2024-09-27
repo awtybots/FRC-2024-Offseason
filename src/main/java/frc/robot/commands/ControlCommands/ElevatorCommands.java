@@ -16,16 +16,16 @@ package frc.robot.commands.ControlCommands;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
 import edu.wpi.first.wpilibj2.command.button.Trigger;
-import frc.robot.subsystems.climber.Climber;
+import frc.robot.subsystems.elevator.Elevator;
 
-public class ClimberCommands {
+public class ElevatorCommands {
 
   private static final double MAX_MS = 0.01;
 
-  private ClimberCommands() {}
+  private ElevatorCommands() {}
 
   /** Wrist command using one axis of a joystick (controlling wrist velocity). */
-  public static Command buttonDrive(Climber climber, Trigger leftTrigger, Trigger rightTrigger) {
+  public static Command buttonDrive(Elevator elevator, Trigger leftTrigger, Trigger rightTrigger) {
     return Commands.run(
         () -> {
           boolean left = leftTrigger.getAsBoolean();
@@ -46,8 +46,8 @@ public class ClimberCommands {
           double position = magnitude * MAX_MS;
 
           // Send command to wrist subsystem to run wrist
-          climber.runTargetPosition(position);
+          elevator.runTargetPosition(position);
         },
-        climber);
+        elevator);
   }
 }

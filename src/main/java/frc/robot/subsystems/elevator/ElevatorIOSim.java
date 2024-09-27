@@ -10,32 +10,32 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 
-package frc.robot.subsystems.climber;
+package frc.robot.subsystems.elevator;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.math.system.plant.DCMotor;
 import edu.wpi.first.wpilibj.simulation.SingleJointedArmSim;
-import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.ElevatorConstants;
 
 /**
- * This implementation of ClimberIO is for the chain climber, in the case of simulation. Currently
+ * This implementation of ElevatorIO is for the chain Elevator, in the case of simulation. Currently
  * inoperative.
  */
 @Deprecated
-public class ClimberIOSim implements ClimberIO {
+public class ElevatorIOSim implements ElevatorIO {
   // ! The settings on this simulation are wrong, fix later (or not lol)
   private SingleJointedArmSim sim =
       new SingleJointedArmSim(DCMotor.getNEO(2), 1.5, 0.004, 1, 0, 1.047, true, 0.524);
   private PIDController pid =
-      new PIDController(ClimberConstants.kP, ClimberConstants.kI, ClimberConstants.kD);
+      new PIDController(ElevatorConstants.kP, ElevatorConstants.kI, ElevatorConstants.kD);
 
   private boolean closedLoop = false;
   private double ffVolts = 0.0;
   private double appliedVolts = 0.0;
 
   @Override
-  public void updateInputs(ClimberIOInputs inputs) {
+  public void updateInputs(ElevatorIOInputs inputs) {
     if (closedLoop) {
       appliedVolts =
           MathUtil.clamp(pid.calculate(sim.getVelocityRadPerSec()) + ffVolts, -12.0, 12.0);

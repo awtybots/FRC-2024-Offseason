@@ -10,7 +10,7 @@
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 // GNU General Public License for more details.
 
-package frc.robot.subsystems.climber;
+package frc.robot.subsystems.elevator;
 
 import com.revrobotics.CANSparkBase.ControlType;
 import com.revrobotics.CANSparkLowLevel.MotorType;
@@ -19,22 +19,21 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkPIDController;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import frc.robot.Constants.ClimberConstants;
+import frc.robot.Constants.ElevatorConstants;
 
 /**
- * This implementation of ClimberIO is for the chain climber, in the case of using two NEO SparkMax
- * motors.
+ * This implementation of ElevatorIO is for the chain Elevator, in the case of using two NEO
+ * SparkMax motors.
  *
  * <p>Note: To use the Spark Flex / NEO Vortex, replace all instances of "CANSparkMax" with
  * "CANSparkFlex".
  */
-public class ClimberIOSparkMax implements ClimberIO {
-  private static final double GEAR_RATIO = 50.0; // 49:1 in reality but too late
+public class ElevatorIOSparkMax implements ElevatorIO {
 
   private final CANSparkMax leftMotor =
-      new CANSparkMax(ClimberConstants.kLeftClimberMotorId, MotorType.kBrushless);
+      new CANSparkMax(ElevatorConstants.kLeftElevatorMotorId, MotorType.kBrushless);
   private final CANSparkMax rightMotor =
-      new CANSparkMax(ClimberConstants.kRightClimberMotorId, MotorType.kBrushless);
+      new CANSparkMax(ElevatorConstants.kRightElevatorMotorId, MotorType.kBrushless);
 
   private final RelativeEncoder leftRelativeEncoder = leftMotor.getEncoder();
   private final RelativeEncoder rightRelativeEncoder = rightMotor.getEncoder();
@@ -43,14 +42,14 @@ public class ClimberIOSparkMax implements ClimberIO {
   private final SparkPIDController rightPID = rightMotor.getPIDController();
 
   private final PIDController leftMathPID;
-  private final PIDController rightMathPID;
+  // private final PIDController rightMathPID;
 
-  private double targetPosition = ClimberConstants.initialPosition;
+  private double targetPosition = ElevatorConstants.initialPosition;
 
-  // private double targetPositionLeft = ClimberConstants.initialPosition;
-  // private double targetPositionRight = ClimberConstants.initialPosition;
+  // private double targetPositionLeft = ElevatorConstants.initialPosition;
+  // private double targetPositionRight = ElevatorConstants.initialPosition;
 
-  public ClimberIOSparkMax() {
+  public ElevatorIOSparkMax() {
     leftMotor.restoreFactoryDefaults();
     rightMotor.restoreFactoryDefaults();
 
@@ -59,29 +58,31 @@ public class ClimberIOSparkMax implements ClimberIO {
 
     leftMotor.setInverted(true);
 
-    leftMotor.setSmartCurrentLimit(ClimberConstants.kCurrentLimit);
-    rightMotor.setSmartCurrentLimit(ClimberConstants.kCurrentLimit);
+    leftMotor.setSmartCurrentLimit(ElevatorConstants.kCurrentLimit);
+    rightMotor.setSmartCurrentLimit(ElevatorConstants.kCurrentLimit);
 
     // leftMotor.burnFlash();
     // rightMotor.burnFlash();
 
-    leftMathPID = new PIDController(ClimberConstants.kP, ClimberConstants.kI, ClimberConstants.kD);
-    rightMathPID = new PIDController(ClimberConstants.kP, ClimberConstants.kI, ClimberConstants.kD);
+    leftMathPID =
+        new PIDController(ElevatorConstants.kP, ElevatorConstants.kI, ElevatorConstants.kD);
+    // rightMathPID =
+    //     new PIDController(ElevatorConstants.kP, ElevatorConstants.kI, ElevatorConstants.kD);
   }
 
   @Override
-  public void updateInputs(ClimberIOInputs inputs) {
+  public void updateInputs(ElevatorIOInputs inputs) {
     inputs.leftPosition =
-        ClimberConstants.gearCircumfrence * (leftRelativeEncoder.getPosition() / GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence * (leftRelativeEncoder.getPosition() / ElevatorConstants.GEAR_RATIO);
     inputs.leftVelocity =
-        ClimberConstants.gearCircumfrence * (leftRelativeEncoder.getVelocity() / GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence * (leftRelativeEncoder.getVelocity() / ElevatorConstants.GEAR_RATIO);
     inputs.leftAppliedVolts = leftMotor.getAppliedOutput() * leftMotor.getBusVoltage();
     inputs.leftCurrentAmps = new double[] {leftMotor.getOutputCurrent()};
 
     inputs.rightPosition =
-        ClimberConstants.gearCircumfrence * (rightRelativeEncoder.getPosition() / GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence * (rightRelativeEncoder.getPosition() / ElevatorConstants.GEAR_RATIO);
     inputs.rightVelocity =
-        ClimberConstants.gearCircumfrence * (rightRelativeEncoder.getVelocity() / GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence * (rightRelativeEncoder.getVelocity() / ElevatorConstants.GEAR_RATIO);
     inputs.rightAppliedVolts = rightMotor.getAppliedOutput() * rightMotor.getBusVoltage();
     inputs.rightCurrentAmps = new double[] {rightMotor.getOutputCurrent()};
 
@@ -97,25 +98,27 @@ public class ClimberIOSparkMax implements ClimberIO {
   @Override
   public void setTargetPosition(double position) {
     // targetPosition =
-    //     MathUtil.clamp(targetPosition + position, ClimberConstants.minPosition,
-    // ClimberConstants.maxPosition);
+    //     MathUtil.clamp(targetPosition + position, ElevatorConstants.minPosition,
+    // ElevatorConstants.maxPosition);
 
     // leftPID.setReference(
-    //     (position / ClimberConstants.gearCircumfrence) * GEAR_RATIO,
+    //     (position / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO,
     //     ControlType.kPosition,
     //     0,
     //     0,
     //     ArbFFUnits.kVoltage);
 
     // rightPID.setReference(
-    //     (position / ClimberConstants.gearCircumfrence) * GEAR_RATIO,
+    //     (position / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO,
     //     ControlType.kPosition,
     //     0,
     //     0,
     //     ArbFFUnits.kVoltage);
     targetPosition =
         MathUtil.clamp(
-            targetPosition + position, ClimberConstants.minPosition, ClimberConstants.maxPosition);
+            targetPosition + position,
+            ElevatorConstants.minPosition,
+            ElevatorConstants.maxPosition);
 
     leftPID.setReference(targetPosition, ControlType.kPosition, 0, 0);
     rightPID.setReference(targetPosition, ControlType.kPosition, 0, 0);
@@ -125,12 +128,12 @@ public class ClimberIOSparkMax implements ClimberIO {
 
     leftMotor.set(
         leftMathPID.calculate(
-            leftPosition, (targetPosition / ClimberConstants.gearCircumfrence) * GEAR_RATIO));
+            leftPosition, (targetPosition / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO));
     // + Constants.FlywheelConstants.kv * targetPosition
     // + Constants.FlywheelConstants.ks);
     rightMotor.set(
         leftMathPID.calculate(
-            rightPosition, (targetPosition / ClimberConstants.gearCircumfrence) * GEAR_RATIO));
+            rightPosition, (targetPosition / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO));
     // + Constants.FlywheelConstants.kv * velocityRevPerSec
     // + Constants.FlywheelConstants.ks);
   }
@@ -138,21 +141,22 @@ public class ClimberIOSparkMax implements ClimberIO {
   // @Override
   // public void setTargetPosition(double positionLeft, double positionRight) {
   //   targetPositionLeft =
-  //       MathUtil.clamp(positionLeft, ClimberConstants.minPosition, ClimberConstants.maxPosition);
+  //       MathUtil.clamp(positionLeft, ElevatorConstants.minPosition,
+  // ElevatorConstants.maxPosition);
 
   //   targetPositionRight =
-  //       MathUtil.clamp(positionRight, ClimberConstants.minPosition,
-  // ClimberConstants.maxPosition);
+  //       MathUtil.clamp(positionRight, ElevatorConstants.minPosition,
+  // ElevatorConstants.maxPosition);
 
   //   leftPID.setReference(
-  //       (positionLeft / ClimberConstants.gearCircumfrence) * GEAR_RATIO,
+  //       (positionLeft / ElevatorConstants.gearCircumfrence) * GEAR_RATIO,
   //       ControlType.kPosition,
   //       0,
   //       0,
   //       ArbFFUnits.kVoltage);
 
   //   rightPID.setReference(
-  //       (positionRight / ClimberConstants.gearCircumfrence) * GEAR_RATIO,
+  //       (positionRight / ElevatorConstants.gearCircumfrence) * GEAR_RATIO,
   //       ControlType.kPosition,
   //       0,
   //       0,

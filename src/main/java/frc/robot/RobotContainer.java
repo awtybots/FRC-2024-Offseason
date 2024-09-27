@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.SequentialCommandGroup;
 import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import frc.robot.commands.ControlCommands.ArmCommands;
 import frc.robot.commands.ControlCommands.DriveCommands;
+import frc.robot.commands.ControlCommands.ElevatorCommands;
 import frc.robot.commands.ControlCommands.IntakeShooterControls;
 import frc.robot.commands.FeedForwardCharacterization;
 import frc.robot.commands.IntakeNote;
@@ -49,6 +50,10 @@ import frc.robot.subsystems.drive.GyroIONavX;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOSparkMax;
+import frc.robot.subsystems.elevator.Elevator;
+import frc.robot.subsystems.elevator.ElevatorIO;
+import frc.robot.subsystems.elevator.ElevatorIOSim;
+import frc.robot.subsystems.elevator.ElevatorIOSparkMax;
 import frc.robot.subsystems.flywheel.Flywheel;
 import frc.robot.subsystems.flywheel.FlywheelIO;
 import frc.robot.subsystems.flywheel.FlywheelIOSim;
@@ -75,6 +80,7 @@ public class RobotContainer {
   private final Flywheel sFlywheel;
   private final Intake sIntake;
   private final Arm sArm;
+  private final Elevator sElevator;
 
   // Controllers
   private final CommandXboxController driverController = new CommandXboxController(0);
@@ -104,6 +110,7 @@ public class RobotContainer {
         sFlywheel = new Flywheel(new FlywheelIOSparkMax());
         sIntake = new Intake(new IntakeIOSparkMax() {}, new ProximitySensorIOV3() {});
         sArm = new Arm(new ArmIOSparkMax() {});
+        sElevator = new Elevator(new ElevatorIOSparkMax() {});
 
         break;
 
@@ -121,6 +128,7 @@ public class RobotContainer {
         sFlywheel = new Flywheel(new FlywheelIOSim());
         sIntake = new Intake(new IntakeIOSim() {}, new ProximitySensorIOV3() {});
         sArm = new Arm(new ArmIOSim() {});
+        sElevator = new Elevator(new ElevatorIOSim() {});
 
         break;
 
@@ -136,6 +144,7 @@ public class RobotContainer {
         sFlywheel = new Flywheel(new FlywheelIO() {});
         sIntake = new Intake(new IntakeIO() {}, new ProximitySensorIOV3() {});
         sArm = new Arm(new ArmIO() {});
+        sElevator = new Elevator(new ElevatorIO() {});
 
         break;
     }
@@ -338,35 +347,36 @@ public class RobotContainer {
     operatorController.rightBumper().whileTrue(new ShootNoteTeleop(sIntake, sFlywheel, sArm));
     operatorController.leftBumper().whileTrue(new PreRunShooter(sFlywheel, sIntake));
 
-    // Climber controls (The first one is 90% probably the one that works.)
-    // sClimber.setDefaultCommand(
-    //     ClimberCommands.buttonDrive(
-    //         sClimber, operatorController.leftBumper(), operatorController.rightBumper()));
+    // Elevator controls (The first one is 90% probably the one that works.)
+    sElevator.setDefaultCommand(
+        ElevatorCommands.buttonDrive(
+            sElevator, operatorController.leftBumper(), operatorController.rightBumper()));
 
     //     operatorController
     // .a()
     // .whileTrue(
-    //     Commands.startEnd(() -> sClimber.runTargetPosition(0), sClimber::stop, sClimber));
+    //     Commands.startEnd(() -> sElevator.runTargetPosition(0), sElevator::stop, sElevator));
 
     // operatorController
     //     .b()
     //     .whileTrue(
     //         Commands.startEnd(
-    //             () -> sClimber.runTargetPosition(0.55), // !Testing numbers
-    //             sClimber::stop,
-    //             sClimber));
+    //             () -> sElevator.runTargetPosition(0.55), // !Testing numbers
+    //             sElevator::stop,
+    //             sElevator));
 
     // driverController
     //     .povUp()
     //     .whileTrue(
     //         Commands.startEnd(
-    //             () -> ClimberCommands.buttonDrive(sClimber, () -> 1), sClimber::stop, sClimber));
+    //             () -> ElevatorCommands.buttonDrive(sElevator, () -> 1), sElevator::stop,
+    // sElevator));
     // driverController
     //     .povDown()
     //     .whileTrue(
     //         Commands.startEnd(
-    //             () -> ClimberCommands.buttonDrive(sClimber, () -> -1), sClimber::stop,
-    // sClimber));
+    //             () -> ElevatorCommands.buttonDrive(sElevator, () -> -1), sElevator::stop,
+    // sElevator));
   }
 
   /**

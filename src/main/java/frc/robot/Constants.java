@@ -154,28 +154,31 @@ public final class Constants {
     public static final double ArmThreshold = 0.1;
   }
 
-  public static final class ClimberConstants {
-    public static final int kLeftClimberMotorId = 16;
-    public static final int kRightClimberMotorId = 15;
+  public static final class ElevatorConstants {
+    public static final int kLeftElevatorMotorId = 16; // TODO PLACEHOLDER
+    public static final int kRightElevatorMotorId = 15; // TODO PLACEHOLDER
 
     public static final int kCurrentLimit = 30;
 
-    public static final double initialPosition = 0.7;
-    public static final double minPosition = -2; // 0
-    public static final double maxPosition = 2; // 0.55
+    public static final double initialPosition = 0.0;
+    public static final double minPosition = 0;
+    public static final double maxPosition =
+        0.277; // Calculated from a CAD approximation, // ! Tuneable
 
-    public static final double climberConversion = 1;
+    public static final double elevatorConversion = 1;
 
     // in meters, i.e. that many meters per rotation
-    public static final double gearCircumfrence = 0.134032531982;
+    public static final double gearCircumfrence =
+        0.150796447372; // Calculated from a CAD approximation, diameter * pi // ! Tuneable
 
     // Climber PID constants
-    public static final double kP = 1; // 0.1
-    public static final double kI = 0.0;
-    public static final double kD = 0.0;
+    public static final double kP = 1; // TODO PLACEHOLDER
+    public static final double kI = 0.0; // TODO PLACEHOLDER
+    public static final double kD = 0.0; // TODO PLACEHOLDER
 
     // Climber Feedforward characterization constants
-    public static final double ks = 0.10;
-    public static final double kv = 0.05;
+    public static final double ks = 0.10; // TODO PLACEHOLDER
+    public static final double kv = 0.05; // TODO PLACEHOLDER
+    public static final double GEAR_RATIO = 49.0; // 49:1, // TODO PLACEHOLDER
   }
 }
