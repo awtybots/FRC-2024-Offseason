@@ -21,7 +21,6 @@ import edu.wpi.first.wpilibj.simulation.FlywheelSim;
  * This implementation of FlywheelIO is a physics simulation for the flywheel. Currently
  * inoperative.
  */
-@Deprecated
 public class FlywheelIOSim implements FlywheelIO {
   // Note that this entire simulation is incorrect.
   private FlywheelSim sim = new FlywheelSim(DCMotor.getNEO(2), 1.5, 0.004);

@@ -20,7 +20,7 @@ import com.revrobotics.RelativeEncoder;
 import com.revrobotics.SparkAbsoluteEncoder;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.math.util.Units;
-import edu.wpi.first.wpilibj.AnalogInput;
+// import edu.wpi.first.wpilibj.AnalogInput;
 import frc.robot.Constants.DriveConstants;
 import java.util.Queue;
 
@@ -40,14 +40,14 @@ public class ModuleIOSparkMax implements ModuleIO {
   // Gear ratios for SDS MK4i L2, adjust as necessary
   private static final double DRIVE_GEAR_RATIO = 5.08 / 1.0;
   private static final double TURN_GEAR_RATIO = 1.0; // 46.42/1.0;
-  private static final double RELATIVE_ENCODER_TURN_GEAR_RATIO = 46.42 / 1.0;
+  // private static final double RELATIVE_ENCODER_TURN_GEAR_RATIO = 46.42 / 1.0;
 
   private final CANSparkMax driveSparkMax;
   private final CANSparkMax turnSparkMax;
 
   private final RelativeEncoder driveEncoder;
   private final RelativeEncoder turnRelativeEncoder;
-  private final AnalogInput turnAbsoluteEncoder;
+  // private final AnalogInput turnAbsoluteEncoder;
   private final Queue<Double> drivePositionQueue;
   private final Queue<Double> turnPositionQueue;
   public boolean isDriveMotorInverted = false;
@@ -64,7 +64,7 @@ public class ModuleIOSparkMax implements ModuleIO {
         driveSparkMax =
             new CANSparkMax(DriveConstants.kFrontLeftDrivingCanId, MotorType.kBrushless);
         turnSparkMax = new CANSparkMax(DriveConstants.kFrontLeftTurningCanId, MotorType.kBrushless);
-        turnAbsoluteEncoder = new AnalogInput(0);
+        // turnAbsoluteEncoder = new AnalogInput(0);
         absoluteEncoderOffset = new Rotation2d(Math.PI / 2.0 + Math.PI); // MUST BE CALIBRATED
         break;
         // Front right
@@ -73,14 +73,14 @@ public class ModuleIOSparkMax implements ModuleIO {
             new CANSparkMax(DriveConstants.kFrontRightDrivingCanId, MotorType.kBrushless);
         turnSparkMax =
             new CANSparkMax(DriveConstants.kFrontRightTurningCanId, MotorType.kBrushless);
-        turnAbsoluteEncoder = new AnalogInput(1);
+        // turnAbsoluteEncoder = new AnalogInput(1);
         absoluteEncoderOffset = new Rotation2d(0 + Math.PI + Math.PI); // MUST BE CALIBRATED
         break;
         // Rear left
       case 2:
         driveSparkMax = new CANSparkMax(DriveConstants.kRearLeftDrivingCanId, MotorType.kBrushless);
         turnSparkMax = new CANSparkMax(DriveConstants.kRearLeftTurningCanId, MotorType.kBrushless);
-        turnAbsoluteEncoder = new AnalogInput(2);
+        // turnAbsoluteEncoder = new AnalogInput(2);
         absoluteEncoderOffset = new Rotation2d(Math.PI + Math.PI + Math.PI); // MUST BE CALIBRATED
         break;
         // Rear right
@@ -88,7 +88,7 @@ public class ModuleIOSparkMax implements ModuleIO {
         driveSparkMax =
             new CANSparkMax(DriveConstants.kRearRightDrivingCanId, MotorType.kBrushless);
         turnSparkMax = new CANSparkMax(DriveConstants.kRearRightTurningCanId, MotorType.kBrushless);
-        turnAbsoluteEncoder = new AnalogInput(3);
+        // turnAbsoluteEncoder = new AnalogInput(3);
         isDriveMotorInverted = true;
         absoluteEncoderOffset =
             new Rotation2d(Math.PI * 3 / 2 + Math.PI + Math.PI); // MUST BE CALIBRATED

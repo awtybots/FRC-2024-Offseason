@@ -21,7 +21,6 @@ import frc.robot.Constants.ArmConstants;
 /**
  * This implementation of ArmIO is for the arm, in the case of simulation. Currently inoperative.
  */
-@Deprecated
 public class ArmIOSim implements ArmIO {
   // ! The settings on this simulation are wrong, fix later (or not lol)
   private SingleJointedArmSim sim =
@@ -59,7 +58,7 @@ public class ArmIOSim implements ArmIO {
   public void setVelocity(double velocityRadPerSec) {
     closedLoop = true;
     pid.setSetpoint(velocityRadPerSec);
-    this.ffVolts = ffVolts;
+    // this.ffVolts = ffVolts;
   }
 
   @Override

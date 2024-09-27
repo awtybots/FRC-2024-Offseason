@@ -12,7 +12,6 @@
 
 package frc.robot.subsystems.arm;
 
-import edu.wpi.first.math.controller.SimpleMotorFeedforward;
 import edu.wpi.first.math.util.Units;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.ArmConstants;
@@ -23,7 +22,7 @@ import org.littletonrobotics.junction.AutoLogOutput;
 public class Arm extends SubsystemBase {
   private final ArmIO io;
   private final ArmIOInputsAutoLogged inputs = new ArmIOInputsAutoLogged();
-  private final SimpleMotorFeedforward ffModel;
+  // private final SimpleMotorFeedforward ffModel;
 
   /** Creates a new Arm. */
   public Arm(ArmIO io) {
@@ -37,15 +36,15 @@ public class Arm extends SubsystemBase {
       case REAL:
         // io.configurePID(ArmConstants.kP, ArmConstants.kI, ArmConstants.kD);
       case REPLAY:
-        ffModel = new SimpleMotorFeedforward(ArmConstants.ks, ArmConstants.kv);
+        // ffModel = new SimpleMotorFeedforward(ArmConstants.ks, ArmConstants.kv);
         // io.configurePID(ArmConstants.kP, ArmConstants.kI, ArmConstants.kD);
         break;
       case SIM:
-        ffModel = new SimpleMotorFeedforward(ArmConstants.ks, ArmConstants.kv);
+        // ffModel = new SimpleMotorFeedforward(ArmConstants.ks, ArmConstants.kv);
         // io.configurePID(ArmConstants.kP, ArmConstants.kI, ArmConstants.kD);
         break;
       default:
-        ffModel = new SimpleMotorFeedforward(ArmConstants.ks, ArmConstants.kv);
+        // ffModel = new SimpleMotorFeedforward(ArmConstants.ks, ArmConstants.kv);
         break;
     }
   }

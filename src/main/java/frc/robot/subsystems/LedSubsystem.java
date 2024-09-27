@@ -28,20 +28,20 @@ public class LedSubsystem extends SubsystemBase {
   private AddressableLEDBuffer m_ledBuffer;
   private final int length;
 
-  private static double ledCount = 0;
-  private static final double LED_SPEED = 1;
-  private final int stripLength;
+  // private static double ledCount = 0;
+  // private static final double LED_SPEED = 1;
+  // private final int stripLength;
 
   Intake intake;
-  private int[] defaultColor;
+  // private int[] defaultColor;
   private boolean isLucky;
 
   public LedSubsystem(int LEDPort, int length, Intake intake) {
     this.length = length;
-    this.stripLength = (int) (length / 2);
+    // this.stripLength = (int) (length / 2);
     this.intake = intake;
 
-    defaultColor = new int[] {0, 255, 0};
+    // defaultColor = new int[] {0, 255, 0};
 
     isLucky = Math.random() > 0.99999;
   }

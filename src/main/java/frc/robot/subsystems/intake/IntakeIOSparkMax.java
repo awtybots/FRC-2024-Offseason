@@ -32,7 +32,7 @@ public class IntakeIOSparkMax implements IntakeIO {
       new CANSparkMax(IntakeConstants.kFollowerIntakeSparkMaxCanId, MotorType.kBrushless);
 
   private final RelativeEncoder intakeEncoder = intakeMotor.getEncoder();
-  private final RelativeEncoder followerIntakeEncoder = followerIntakeMotor.getEncoder();
+  // private final RelativeEncoder followerIntakeEncoder = followerIntakeMotor.getEncoder();
 
   private final SparkPIDController intakePID = intakeMotor.getPIDController();
 

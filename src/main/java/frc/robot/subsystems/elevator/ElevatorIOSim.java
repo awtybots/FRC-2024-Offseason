@@ -22,7 +22,6 @@ import frc.robot.Constants.ElevatorConstants;
  * This implementation of ElevatorIO is for the chain Elevator, in the case of simulation. Currently
  * inoperative.
  */
-@Deprecated
 public class ElevatorIOSim implements ElevatorIO {
   // ! The settings on this simulation are wrong, fix later (or not lol)
   private SingleJointedArmSim sim =

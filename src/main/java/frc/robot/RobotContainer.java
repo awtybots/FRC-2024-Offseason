@@ -66,7 +66,6 @@ import frc.robot.subsystems.intake.ProximitySensorIOV3;
 import java.util.ArrayList;
 import java.util.List;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
-import org.littletonrobotics.junction.networktables.LoggedDashboardNumber;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -89,10 +88,10 @@ public class RobotContainer {
   // Dashboard inputs - this seems to be for auto testing so I won't be adding the others
   // See the Feedforward Characterizations
   private final LoggedDashboardChooser<Command> autoChooser;
-  private final LoggedDashboardNumber flywheelSpeedInput =
-      new LoggedDashboardNumber("Flywheel Speed", 1500.0);
-  private final LoggedDashboardNumber armSpeedInput =
-      new LoggedDashboardNumber("Arm Speed", 1500.0);
+//   private final LoggedDashboardNumber flywheelSpeedInput =
+//       new LoggedDashboardNumber("Flywheel Speed", 1500.0);
+//   private final LoggedDashboardNumber armSpeedInput =
+//       new LoggedDashboardNumber("Arm Speed", 1500.0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {

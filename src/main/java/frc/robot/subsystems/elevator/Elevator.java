@@ -17,8 +17,8 @@ import frc.robot.Constants.ElevatorConstants;
 import frc.robot.Constants.EnvironmentalConstants;
 import org.littletonrobotics.junction.AutoLogOutput;
 
-// ! TODO Seperate target positions but they're controlled by one so that they can be controlled
-// ! seperately from smartdashboard
+// TODO Seperate target positions but they're controlled by one so that they can be controlled
+// seperately from smartdashboard
 
 /** This subsystem is for the chain Elevator. */
 public class Elevator extends SubsystemBase {
