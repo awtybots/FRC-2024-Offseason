@@ -73,16 +73,20 @@ public class ElevatorIOSparkMax implements ElevatorIO {
   @Override
   public void updateInputs(ElevatorIOInputs inputs) {
     inputs.leftPosition =
-        ElevatorConstants.gearCircumfrence * (leftRelativeEncoder.getPosition() / ElevatorConstants.GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence
+            * (leftRelativeEncoder.getPosition() / ElevatorConstants.GEAR_RATIO);
     inputs.leftVelocity =
-        ElevatorConstants.gearCircumfrence * (leftRelativeEncoder.getVelocity() / ElevatorConstants.GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence
+            * (leftRelativeEncoder.getVelocity() / ElevatorConstants.GEAR_RATIO);
     inputs.leftAppliedVolts = leftMotor.getAppliedOutput() * leftMotor.getBusVoltage();
     inputs.leftCurrentAmps = new double[] {leftMotor.getOutputCurrent()};
 
     inputs.rightPosition =
-        ElevatorConstants.gearCircumfrence * (rightRelativeEncoder.getPosition() / ElevatorConstants.GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence
+            * (rightRelativeEncoder.getPosition() / ElevatorConstants.GEAR_RATIO);
     inputs.rightVelocity =
-        ElevatorConstants.gearCircumfrence * (rightRelativeEncoder.getVelocity() / ElevatorConstants.GEAR_RATIO);
+        ElevatorConstants.gearCircumfrence
+            * (rightRelativeEncoder.getVelocity() / ElevatorConstants.GEAR_RATIO);
     inputs.rightAppliedVolts = rightMotor.getAppliedOutput() * rightMotor.getBusVoltage();
     inputs.rightCurrentAmps = new double[] {rightMotor.getOutputCurrent()};
 
@@ -128,12 +132,14 @@ public class ElevatorIOSparkMax implements ElevatorIO {
 
     leftMotor.set(
         leftMathPID.calculate(
-            leftPosition, (targetPosition / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO));
+            leftPosition,
+            (targetPosition / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO));
     // + Constants.FlywheelConstants.kv * targetPosition
     // + Constants.FlywheelConstants.ks);
     rightMotor.set(
         leftMathPID.calculate(
-            rightPosition, (targetPosition / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO));
+            rightPosition,
+            (targetPosition / ElevatorConstants.gearCircumfrence) * ElevatorConstants.GEAR_RATIO));
     // + Constants.FlywheelConstants.kv * velocityRevPerSec
     // + Constants.FlywheelConstants.ks);
   }

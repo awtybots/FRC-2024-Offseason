@@ -22,6 +22,7 @@ import org.littletonrobotics.junction.AutoLogOutput;
 public class Arm extends SubsystemBase {
   private final ArmIO io;
   private final ArmIOInputsAutoLogged inputs = new ArmIOInputsAutoLogged();
+
   // private final SimpleMotorFeedforward ffModel;
 
   /** Creates a new Arm. */

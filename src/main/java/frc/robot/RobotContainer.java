@@ -88,10 +88,11 @@ public class RobotContainer {
   // Dashboard inputs - this seems to be for auto testing so I won't be adding the others
   // See the Feedforward Characterizations
   private final LoggedDashboardChooser<Command> autoChooser;
-//   private final LoggedDashboardNumber flywheelSpeedInput =
-//       new LoggedDashboardNumber("Flywheel Speed", 1500.0);
-//   private final LoggedDashboardNumber armSpeedInput =
-//       new LoggedDashboardNumber("Arm Speed", 1500.0);
+
+  //   private final LoggedDashboardNumber flywheelSpeedInput =
+  //       new LoggedDashboardNumber("Flywheel Speed", 1500.0);
+  //   private final LoggedDashboardNumber armSpeedInput =
+  //       new LoggedDashboardNumber("Arm Speed", 1500.0);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
